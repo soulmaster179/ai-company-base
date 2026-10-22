@@ -17,13 +17,31 @@ Bạn chỉ cần ra lệnh cho giám đốc, còn giám đốc tự chia việc
 Lần sau quay lại, mở phiên mới và gõ `/bat-dau` là nó đọc sổ tiến độ rồi làm tiếp.
 Muốn xem tiến độ thì gõ `/tien-do`.
 
+## Chuyển dự án có sẵn sang ngôn ngữ khác
+
+1. Tạo thư mục dự án mới, chép vào đó `.claude/` và `CLAUDE.md` từ bộ khung này.
+2. Chép **nguyên dự án cũ** vào thư mục `legacy/` bên trong. AI chỉ đọc, không bao giờ sửa code cũ.
+3. Mở thư mục mới trong Claude Code và gõ:
+   ```
+   /chuyen-doi từ PHP sang Node.js (Express), giữ nguyên database MySQL và các URL
+   ```
+4. AI phân tích code cũ ra 3 file trong `project-docs/`:
+   - `legacy-analysis.md`: tính năng, module, database, API, các "hành vi ẩn" dễ bị mất khi port
+   - `migration-map.md`: thư viện cũ tương ứng thư viện mới, thứ tự chuyển, rủi ro
+   - `parity-checklist.md`: danh sách kiểm tra để bản mới chạy giống hệt bản cũ
+5. Bạn duyệt bản tóm tắt. Sau đó AI chuyển từng module, QA so sánh từng mục với bản cũ.
+
+Gõ `/chuyen-doi` (không kèm gì) để làm tiếp lần sau.
+
 ## Bên trong có gì
 
 ```
 CLAUDE.md                  ← "nội quy công ty": quy trình giám đốc phải theo
-.claude/agents/            ← 13 nhân viên (phòng ban)
-.claude/skills/bat-dau/    ← lệnh /bat-dau
+.claude/agents/            ← 14 nhân viên (phòng ban)
+.claude/skills/bat-dau/    ← lệnh /bat-dau (dự án mới)
+.claude/skills/chuyen-doi/ ← lệnh /chuyen-doi (chuyển dự án cũ sang ngôn ngữ khác)
 .claude/skills/tien-do/    ← lệnh /tien-do
+legacy/                    ← (chỉ khi chuyển đổi) code dự án cũ, AI chỉ đọc
 project-specs/BRIEF.md     ← yêu cầu dự án
 project-tasks/             ← danh sách task (PM tạo)
 project-docs/STATUS.md     ← sổ tiến độ (để làm tiếp qua nhiều phiên)
@@ -56,6 +74,6 @@ Bạn → 👔 Giám đốc → 📋 PM chia task → (bạn duyệt) → 📐 K
 
 ## Bản quyền
 
-Các file trong `.claude/agents/` lấy từ
+Các file trong `.claude/agents/` (trừ `legacy-analyst.md`) lấy từ
 [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) (giấy phép MIT,
 xem `licenses/agency-agents-LICENSE`), chỉ đổi trường `name` để hợp với Claude Code.

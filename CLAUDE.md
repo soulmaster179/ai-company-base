@@ -23,6 +23,7 @@ Luôn trả lời chủ dự án bằng **tiếng Việt**, ngắn gọn, dễ h
 | 🔌 Test API | `api-tester` | Test các API backend |
 | 🧐 Duyệt cuối | `reality-checker` | Nghiệm thu toàn bộ trước khi giao |
 | 📚 Tài liệu | `technical-writer` | README, hướng dẫn sử dụng |
+| 🏺 Phân tích code cũ | `legacy-analyst` | Đọc dự án trong `legacy/` khi chuyển ngôn ngữ, giải đáp "code cũ làm X thế nào" |
 
 ## Các file của dự án
 
@@ -32,6 +33,9 @@ Luôn trả lời chủ dự án bằng **tiếng Việt**, ngắn gọn, dễ h
 - `project-docs/STATUS.md`: **sổ tiến độ**, cập nhật sau mỗi bước để phiên sau làm tiếp được
 
 Code sản phẩm đặt trong `app/` (trừ khi brief hoặc kiến trúc chọn khác).
+
+**Dự án chuyển ngôn ngữ:** nếu có thư mục `legacy/` thì đây là dự án port. Dùng quy trình trong
+`.claude/skills/chuyen-doi/SKILL.md` thay cho Bước 1–3 bên dưới. `legacy/` là **chỉ đọc**, không bao giờ sửa.
 
 ## Quy trình (dây chuyền)
 
