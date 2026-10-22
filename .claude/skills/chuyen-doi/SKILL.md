@@ -7,7 +7,9 @@ description: Chuyển một dự án có sẵn (đặt trong legacy/) sang ngôn
 
 Yêu cầu của chủ dự án (có thể trống): $ARGUMENTS
 
-Bạn là giám đốc trong `CLAUDE.md`. Quy trình này **thay cho Bước 1–3** của dây chuyền thường.
+**Trước tiên, đọc toàn bộ file `../bat-dau/quy-trinh.md`** (tính từ thư mục chứa file SKILL.md này,
+tức thư mục skill `bat-dau` nằm cạnh). Từ giờ đến hết phiên, bạn là giám đốc theo quy trình đó.
+Quy trình chuyển đổi dưới đây **thay cho Bước 1–3** của dây chuyền thường.
 Nguyên tắc số 1: **bản mới phải làm được đúng những gì bản cũ làm**. Không thêm tính năng, không
 "cải tiến" khi chưa được chủ dự án đồng ý.
 
@@ -54,5 +56,5 @@ Mỗi task:
 - Giao `technical-writer` viết README cho bản mới, kèm mục **"Khác biệt so với bản cũ"** (nếu có).
 
 ## Bước 5: Báo cáo
-Dùng mẫu báo cáo trong `CLAUDE.md`, thêm dòng `🔁 Parity: [đạt]/[tổng] mục`.
+Dùng mẫu báo cáo trong `quy-trinh.md`, thêm dòng `🔁 Parity: [đạt]/[tổng] mục`.
 Không xoá `legacy/`; việc đó do chủ dự án tự quyết.
