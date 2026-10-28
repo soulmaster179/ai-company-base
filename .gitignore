@@ -1,0 +1,5 @@
+# Graphify cache
+graphify-out/cache/
+
+# Superpowers local artifacts
+.superpowers/

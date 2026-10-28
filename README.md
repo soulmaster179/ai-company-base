@@ -14,6 +14,27 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 Script chép agent và lệnh vào `C:\Users\<bạn>\.claude\`. Sửa gì trong repo này thì chạy lại để cập nhật.
 Muốn gỡ thì thêm `-Uninstall`.
 
+## Bộ nhớ xuyên phiên (bật khi cài)
+
+`install.ps1` bật bộ nhớ cho **mọi phiên Claude Code trên máy**, gồm hai phần:
+
+- **Auto-memory của Claude Code:** đặt `autoMemoryEnabled: true` trong `~/.claude/settings.json`. Claude tự ghi nhớ và đọc lại theo từng project.
+- **Nhật ký phiên lưu thẳng trong dự án:** một hook `SessionEnd` (cần Python 3) tự động ghi một ghi chú ngắn vào ngay thư mục dự án:
+  - Nếu dự án có `project-docs/` (chuẩn công ty AI): lưu vào `project-docs/sessions/`.
+  - Dự án thông thường: lưu vào `.claude/sessions/`.
+  - Nhờ nằm trực tiếp trong project, nhật ký phiên đi theo Git repo — đẩy lên GitHub hay cài lại máy tải về vẫn còn nguyên vẹn.
+  - Ghi chú chỉ ghi tóm tắt: giờ, mã phiên, lý do kết thúc, câu hỏi đầu tiên, tối đa 20 đường dẫn file đã sửa và 10 lệnh đã chạy (tối đa 400 ký tự/lệnh). Chuỗi giống mật khẩu/token được tự động che thành `[REDACTED]`. **Không** lưu nội dung file, kết quả lệnh hay toàn bộ hội thoại. Mọi thứ nằm trên máy bạn, không gửi đi đâu.
+- Phiên ngắn (dưới 2 lời nhắn) và lỗi đọc transcript đều bị bỏ qua, không chặn việc đóng phiên.
+
+Không có Python thì auto-memory vẫn bật, chỉ thiếu nhật ký phiên; cài Python rồi chạy lại `install.ps1`.
+
+**Tắt:** đặt `"autoMemoryEnabled": false` trong `~/.claude/settings.json`, hoặc chạy `install.ps1 -Uninstall` (chỉ gỡ phần của bộ này, giữ nguyên hook và cài đặt khác của bạn).
+
+## Lập đồ thị code bằng Graphify
+
+Gõ `/graphify` trong thư mục dự án. Mặc định chỉ phân tích cấu trúc code (AST), chạy trên máy, không cần API key, kết quả ở `graphify-out/` (`graph.json`, `GRAPH_REPORT.md`).
+Cần cài trước: `pip install graphifyy`. Chế độ semantic (gọi mô hình, có thể tốn phí và gửi ngữ cảnh code đi) chỉ chạy khi bạn yêu cầu rõ. Lệnh này không bao giờ tự chạy.
+
 ## Dự án mới
 
 1. Tạo một thư mục trống và mở nó trong Claude Code.
@@ -54,6 +75,9 @@ install.ps1                       ← cài / cập nhật / gỡ
     brief-mau.md                  ← mẫu brief dự án
 .claude/skills/chuyen-doi/        ← lệnh /chuyen-doi
 .claude/skills/tien-do/           ← lệnh /tien-do
+.claude/skills/graphify/          ← lệnh /graphify
+scripts/session_autosave.py       ← hook ghi nhật ký phiên
+tests/                            ← test cho hook
 ```
 
 Trong mỗi dự án, AI tự tạo:
